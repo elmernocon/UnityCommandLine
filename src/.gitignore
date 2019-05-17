@@ -9,6 +9,7 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
+[Uu]nityPackages/
 editor.log
 
 # Never ignore Asset meta data
