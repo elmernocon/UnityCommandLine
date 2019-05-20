@@ -141,7 +141,7 @@ namespace UnityCommandLine.BuildPipeline
         /// <summary>
         /// The argument switch for <see cref="BuildAssetBundleOptions.ForceRebuildAssetBundle"/>.
         /// </summary>
-        public const string ARG_OPTION_FORCE_REBUILD_ASSET_BUNDLE = "-optionForceRebuildAssetBundlee";
+        public const string ARG_OPTION_FORCE_REBUILD_ASSET_BUNDLE = "-optionForceRebuildAssetBundle";
 
         /// <summary>
         /// The argument switch for <see cref="BuildAssetBundleOptions.IgnoreTypeTreeChanges"/>.
