@@ -22,7 +22,7 @@ namespace UnityCommandLine.BuildPipeline
     /// <summary>
     /// The base class for all build-player-related commands executable through Unity's command line interface.
     /// </summary>
-    public abstract class BuildPlayerCommandBase : CommandBase
+    public abstract class BuildPlayerCommandBase : BuildPipelineCommandBase
     {
         #region Statics
 
@@ -54,30 +54,6 @@ namespace UnityCommandLine.BuildPipeline
                                       .Where(scene => scene.enabled && !string.IsNullOrEmpty(scene.path))
                                       .Select(scene => scene.path)
                                       .ToArray();
-        }
-        
-        /// <summary>
-        /// Checks whether the editor is currently building a player.
-        /// </summary>
-        /// <returns>Returns <c>true</c> if the editor is busy, otherwise <c>false</c>.</returns>
-        private static bool IsBuildPipelineBusy()
-        {
-            return UBuildPipeline.isBuildingPlayer;
-        }
-        
-        /// <summary>
-        /// Checks whether the editor supports the build target.
-        /// </summary>
-        /// <param name="targetGroup">The build target group.</param>
-        /// <param name="target">The build target.</param>
-        /// <returns>Returns <c>true</c> if the build target is supported, otherwise <c>false</c>.</returns>
-        private static bool IsBuildTargetSupported(BuildTargetGroup targetGroup, BuildTarget target)
-        {
-#if UNITY_2018_1_OR_NEWER
-            return UBuildPipeline.IsBuildTargetSupported(targetGroup, target);
-#else
-            return true;
-#endif
         }
 
         /// <summary>
@@ -238,7 +214,7 @@ namespace UnityCommandLine.BuildPipeline
                 Settings.Options |= BuildOptions.StrictMode;
 
 #if UNITY_2018_1_OR_NEWER
-            if (HasArgument(Values.ARG_INCLUDE_TEST_ASSEMBLIES))
+            if (HasArgument(Values.ARG_OPTION_INCLUDE_TEST_ASSEMBLIES))
                 Settings.Options |= BuildOptions.IncludeTestAssemblies;
 #endif
             
