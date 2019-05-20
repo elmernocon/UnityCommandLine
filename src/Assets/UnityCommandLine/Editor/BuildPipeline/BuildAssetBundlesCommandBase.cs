@@ -160,6 +160,11 @@ namespace UnityCommandLine.BuildPipeline
                 Settings.Options |= BuildAssetBundleOptions.ChunkBasedCompression;
 #endif
 
+#if UNITY_5_4_OR_NEWER
+            if (HasArgument(Values.ARG_OPTION_STRICT_MODE))
+                Settings.Options |= BuildAssetBundleOptions.StrictMode;
+#endif
+
 #if UNITY_5_5_OR_NEWER
             if (HasArgument(Values.ARG_OPTION_DRY_RUN_BUILD))
                 Settings.Options |= BuildAssetBundleOptions.DryRunBuild;
