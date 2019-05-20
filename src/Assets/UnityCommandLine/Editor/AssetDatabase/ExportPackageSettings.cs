@@ -15,17 +15,17 @@ namespace UnityCommandLine.AssetDatabase
     /// <summary>
     /// A container class for all values used when exporting a package.
     /// </summary>
-    public class Settings
+    public class ExportPackageSettings
     {
         #region Statics
 
         #region Static Methods
 
         /// <summary>
-        /// Prints the values of a <see cref="Settings"/> instance.
+        /// Prints the values of a <see cref="ExportPackageSettings"/> instance.
         /// </summary>
-        /// <param name="settings">The settings instance.</param>
-        public static string Print(Settings settings)
+        /// <param name="export package settings">The export package settings instance.</param>
+        public static string Print(ExportPackageSettings settings)
         {
             const string listItemPrefix = "  - ";
             var stringBuilder = new StringBuilder();

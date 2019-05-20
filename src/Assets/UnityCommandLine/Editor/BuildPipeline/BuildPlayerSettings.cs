@@ -15,17 +15,17 @@ namespace UnityCommandLine.BuildPipeline
     /// <summary>
     /// A container class for all values used when building a player.
     /// </summary>
-    public class Settings
+    public class BuildPlayerSettings
     {
         #region Statics
 
         #region Static Methods
 
         /// <summary>
-        /// Applies the values of a <see cref="Settings"/> instance to <see cref="EditorUserBuildSettings"/> and <see cref="PlayerSettings"/>.
+        /// Applies the values of a <see cref="BuildPlayerSettings"/> instance to <see cref="EditorUserBuildSettings"/> and <see cref="PlayerSettings"/>.
         /// </summary>
-        /// <param name="settings">The settings instance.</param>
-        public static void Apply(Settings settings)
+        /// <param name="settings">The build player settings instance.</param>
+        public static void Apply(BuildPlayerSettings settings)
         {
             var targetGroup = BuildTargetUtils.GetBuildTargetGroup(settings.Target);
 
@@ -35,12 +35,12 @@ namespace UnityCommandLine.BuildPipeline
         }
 
         /// <summary>
-        /// Creates an instance of <see cref="Settings"/> with values from <see cref="EditorUserBuildSettings"/> and <see cref="PlayerSettings"/>.
+        /// Creates an instance of <see cref="BuildPlayerSettings"/> with values from <see cref="EditorUserBuildSettings"/> and <see cref="PlayerSettings"/>.
         /// </summary>
-        /// <returns>Returns a settings object.</returns>
-        public static Settings Create()
+        /// <returns>Returns a build player settings object.</returns>
+        public static BuildPlayerSettings Create()
         {
-            return new Settings
+            return new BuildPlayerSettings
             {
                     Target = EditorUserBuildSettings.activeBuildTarget,
                     ApplicationIdentifier = PlayerSettings.applicationIdentifier,
@@ -49,10 +49,10 @@ namespace UnityCommandLine.BuildPipeline
         }
 
         /// <summary>
-        /// Prints the values of a <see cref="Settings"/> instance.
+        /// Prints the values of a <see cref="BuildPlayerSettings"/> instance.
         /// </summary>
-        /// <param name="settings">The settings instance.</param>
-        public static string Print(Settings settings)
+        /// <param name="settings">The build player settings instance.</param>
+        public static string Print(BuildPlayerSettings settings)
         {
             const string listItemPrefix = "  - ";
             var stringBuilder = new StringBuilder();
@@ -123,7 +123,7 @@ namespace UnityCommandLine.BuildPipeline
         #region Methods
 
         /// <summary>
-        /// Applies the values of this <see cref="Settings"/> instance to <see cref="EditorUserBuildSettings"/> and <see cref="PlayerSettings"/>.
+        /// Applies the values of this <see cref="BuildPlayerSettings"/> instance to <see cref="EditorUserBuildSettings"/> and <see cref="PlayerSettings"/>.
         /// </summary>
         public void Apply()
         {

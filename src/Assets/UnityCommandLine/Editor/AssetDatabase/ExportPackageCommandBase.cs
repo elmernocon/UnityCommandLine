@@ -28,8 +28,8 @@ namespace UnityCommandLine.AssetDatabase
         /// <summary>
         /// Exports a package.
         /// </summary>
-        /// <param name="settings">The package settings.</param>
-        private static void ExportPackage(Settings settings)
+        /// <param name="settings">The export package settings.</param>
+        private static void ExportPackage(ExportPackageSettings settings)
         {
             UnityEditor.AssetDatabase.ExportPackage(settings.AssetPathNames, settings.OutputPath, settings.Options);
         }
@@ -37,9 +37,9 @@ namespace UnityCommandLine.AssetDatabase
         /// <summary>
         /// Print a <see cref="Settings"/> object.
         /// </summary>
-        /// <param name="settings">The settings object.</param>
+        /// <param name="settings">The export package settings object.</param>
         /// <param name="title">The title.</param>
-        private static void PrintSettings(Settings settings, string title = null)
+        private static void PrintSettings(ExportPackageSettings settings, string title = null)
         {
             PrintSeparator();
             
@@ -60,9 +60,9 @@ namespace UnityCommandLine.AssetDatabase
         #region Fields
 
         /// <summary>
-        /// The settings to use when exporting the package.
+        /// The export package settings to use when exporting the package.
         /// </summary>
-        protected readonly Settings Settings;
+        protected readonly ExportPackageSettings Settings;
 
         #endregion
 
@@ -74,7 +74,7 @@ namespace UnityCommandLine.AssetDatabase
         /// </summary>
         protected ExportPackageCommandBase()
         {
-            Settings = new Settings();
+            Settings = new ExportPackageSettings();
         }
 
         #endregion

@@ -31,7 +31,7 @@ namespace UnityCommandLine.BuildPipeline
         /// <summary>
         /// Builds a player.
         /// </summary>
-        /// <param name="settings">The build settings.</param>
+        /// <param name="settings">The build player settings.</param>
         /// <returns>Either a BuildReport object or a string depending on the editor version used.</returns>
         private static
 #if UNITY_2018_1_OR_NEWER
@@ -39,7 +39,7 @@ namespace UnityCommandLine.BuildPipeline
 #else
                 string
 #endif
-                BuildPlayer(Settings settings)
+                BuildPlayer(BuildPlayerSettings settings)
         {
             return UBuildPipeline.BuildPlayer(settings.Levels, settings.OutputPath, settings.Target, settings.Options);
         }
@@ -100,9 +100,9 @@ namespace UnityCommandLine.BuildPipeline
         /// <summary>
         /// Print a <see cref="Settings"/> object.
         /// </summary>
-        /// <param name="settings">The settings object.</param>
+        /// <param name="settings">The build player settings object.</param>
         /// <param name="title">The title.</param>
-        private static void PrintSettings(Settings settings, string title = null)
+        private static void PrintSettings(BuildPlayerSettings settings, string title = null)
         {
             PrintSeparator();
             
@@ -123,11 +123,11 @@ namespace UnityCommandLine.BuildPipeline
         #region Fields
         
         /// <summary>
-        /// The settings to use when building the player.
+        /// The build player settings to use when building the player.
         /// </summary>
-        protected readonly Settings Settings;
+        protected readonly BuildPlayerSettings Settings;
         
-        private readonly Settings _backupSettings;
+        private readonly BuildPlayerSettings _backupSettings;
 
         #endregion
 
@@ -140,8 +140,8 @@ namespace UnityCommandLine.BuildPipeline
         /// <param name="target">The build target.</param>
         protected BuildPlayerCommandBase(BuildTarget target)
         {
-            _backupSettings = Settings.Create();
-            Settings = Settings.Create();
+            _backupSettings = BuildPlayerSettings.Create();
+            Settings = BuildPlayerSettings.Create();
 
             Settings.Target = target;
             
