@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 3430211504
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 06cb9402a053917d6827ded3f3985e15
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a15026e7645264409a88f84f584030a1
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/Red.mat
+- Assets/AssetBundles/DarkRed.mat
+Dependencies: []

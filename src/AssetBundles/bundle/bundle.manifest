@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 40407446
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ab1/materials
+      Dependencies: {}
