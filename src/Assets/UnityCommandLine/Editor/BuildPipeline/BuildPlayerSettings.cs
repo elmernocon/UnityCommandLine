@@ -32,6 +32,7 @@ namespace UnityCommandLine.BuildPipeline
             EditorUserBuildSettings.SwitchActiveBuildTarget(targetGroup, settings.Target);
             PlayerSettings.SetApplicationIdentifier(targetGroup, settings.ApplicationIdentifier);
             PlayerSettings.bundleVersion = settings.BundleVersion;
+            EditorPrefs.SetString("AndroidSdkRoot", settings.AndroidSdkPath);
             PlayerSettings.Android.keyaliasName = settings.AndroidKeyAliasName;
             PlayerSettings.Android.keyaliasPass = settings.AndroidKeyAliasPass;
             PlayerSettings.Android.keystoreName = settings.AndroidKeyStoreName;
@@ -49,6 +50,7 @@ namespace UnityCommandLine.BuildPipeline
                     Target = EditorUserBuildSettings.activeBuildTarget,
                     ApplicationIdentifier = PlayerSettings.applicationIdentifier,
                     BundleVersion = PlayerSettings.bundleVersion,
+                    AndroidSdkPath = EditorPrefs.GetString("AndroidSdkRoot"),
                     AndroidKeyAliasName = PlayerSettings.Android.keyaliasName,
                     AndroidKeyAliasPass = PlayerSettings.Android.keyaliasPass,
                     AndroidKeyStoreName = PlayerSettings.Android.keystoreName,
@@ -72,6 +74,7 @@ namespace UnityCommandLine.BuildPipeline
             if (!string.IsNullOrEmpty(settings.AndroidKeyAliasName) ||
                 !string.IsNullOrEmpty(settings.AndroidKeyStoreName))
             {
+                stringBuilder.AppendLine(string.Format("EditorPrefs.AndroidSdkRoot: {0}", settings.AndroidSdkPath));
                 stringBuilder.AppendLine("PlayerSettings.Android:");
                 stringBuilder.AppendLine(string.Format(" - KeyAliasName: {0}", settings.AndroidKeyAliasName));
                 stringBuilder.AppendLine(string.Format(" - KeyAliasPass: {0}", settings.AndroidKeyAliasPass));
@@ -110,6 +113,11 @@ namespace UnityCommandLine.BuildPipeline
         /// Gets and sets the <see cref="PlayerSettings.bundleVersion"/>
         /// </summary>
         public string BundleVersion { get; set; }
+        
+        /// <summary>
+        /// Gets and sets the <see cref="EditorPrefs"/>[<c>AndroidSdkRoot</c>].
+        /// </summary>
+        public string AndroidSdkPath { get; set; }
         
         /// <summary>
         /// Gets and sets the <see cref="PlayerSettings.Android.keyaliasName"/>.

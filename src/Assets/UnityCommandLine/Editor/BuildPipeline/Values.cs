@@ -79,6 +79,11 @@ namespace UnityCommandLine.BuildPipeline
         public const string ARG_BUNDLE_VERSION = "-bundleVersion";
 
         /// <summary>
+        /// The argument key for <see cref="EditorPrefs"/>[<c>AndroidSdkRoot</c>].
+        /// </summary>
+        public const string ARG_ANDROID_SDK_PATH = "-androidSdkPath";
+
+        /// <summary>
         /// The argument key for <see cref="PlayerSettings.Android.keyaliasName"/>.
         /// </summary>
         public const string ARG_ANDROID_KEY_ALIAS_NAME = "-androidKeyAliasName";

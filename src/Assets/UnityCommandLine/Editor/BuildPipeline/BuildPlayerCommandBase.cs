@@ -190,6 +190,10 @@ namespace UnityCommandLine.BuildPipeline
             // Set android only settings.
             if (Settings.TargetGroup == BuildTargetGroup.Android)
             {
+                string androidSdkPath;
+                if (GetArgumentValue(Values.ARG_ANDROID_SDK_PATH, out androidSdkPath))
+                    Settings.AndroidSdkPath = androidSdkPath;
+
                 string keyAliasName;
                 if (GetArgumentValue(Values.ARG_ANDROID_KEY_ALIAS_NAME, out keyAliasName))
                     Settings.AndroidKeyAliasName = keyAliasName;
