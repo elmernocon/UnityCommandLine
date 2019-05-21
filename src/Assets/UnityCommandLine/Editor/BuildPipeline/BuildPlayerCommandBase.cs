@@ -149,6 +149,11 @@ namespace UnityCommandLine.BuildPipeline
                 var report = BuildPlayer(Settings);
 
                 PrintReport(report);
+
+#if UNITY_2018_1_OR_NEWER
+                if (report.summary.result != BuildResult.Succeeded)
+                    throw new Exception("Build failed!");
+#endif
             }
             finally
             {
