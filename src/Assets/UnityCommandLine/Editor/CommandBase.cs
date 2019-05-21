@@ -9,6 +9,7 @@
 
 using System;
 using System.Linq;
+using UnityEngine;
 
 namespace UnityCommandLine
 {
@@ -22,6 +23,12 @@ namespace UnityCommandLine
     public abstract class CommandBase
     {
         #region Statics
+
+        #region Static Fields
+
+        private static readonly Func<string, string, bool> StringComparer = (s1, s2) => s1.Contains(s2);
+
+        #endregion
 
         #region Static Methods
 
@@ -49,9 +56,25 @@ namespace UnityCommandLine
             
             for (var i = 0; i < argumentsLength; i++)
             {
-                if (!arguments[i].Equals(argumentKey, comparisonType))
+                var arg = arguments[i];
+                
+                if (!StringComparer(arg, argumentKey))
                     continue;
 
+                var search = $"{argumentKey}=";
+
+                if (arg.Contains(search))
+                {
+                    var idx = arg.IndexOf(search, StringComparison.Ordinal);
+                    var val = arg.Substring(idx + search.Length);
+
+                    if (!string.IsNullOrEmpty(val))
+                    {
+                        argumentValue = val;
+                        return true;
+                    }
+                }
+                
                 if (i < argumentsLength - 1)
                 {
                     argumentValue = arguments[i + 1];
@@ -74,7 +97,7 @@ namespace UnityCommandLine
         /// <returns>Returns <c>true</c> if the given argument was found, otherwise <c>false</c>.</returns>
         protected static bool HasArgument(string[] arguments, string argument, StringComparison comparisonType = Values.DEFAULT_STRING_COMPARISON)
         {
-            return arguments.Any(arg => arg.Equals(argument, comparisonType));
+            return arguments.Any(arg => StringComparer(arg, argument));
         }
 
         /// <summary>
