@@ -25,10 +25,9 @@ namespace UnityCommandLine.BuildPipeline
         /// Prints the values of a <see cref="BuildAssetBundlesSettings"/> instance.
         /// </summary>
         /// <param name="settings">The build asset bundles settings instance.</param>
-        public static string Print(BuildAssetBundlesSettings settings)
+        /// <param name="stringBuilder">The string builder instance.</param>
+        public static void Print(BuildAssetBundlesSettings settings, StringBuilder stringBuilder)
         {
-            var stringBuilder = new StringBuilder();
-            
             if (!string.IsNullOrEmpty(settings.OutputPath))
                 stringBuilder.AppendLine(string.Format("OutputPath: {0}", settings.OutputPath));
             
@@ -36,7 +35,6 @@ namespace UnityCommandLine.BuildPipeline
                 stringBuilder.AppendLine(string.Format("Options: {0}", settings.Options));
             
             stringBuilder.AppendLine(string.Format("TargetPlatform: {0}", settings.TargetPlatform));
-            return stringBuilder.ToString().TrimEnd('\n');
         }
 
         #endregion
@@ -59,16 +57,6 @@ namespace UnityCommandLine.BuildPipeline
         /// Gets and sets the target platform.
         /// </summary>
         public BuildTarget TargetPlatform { get; set; }
-
-        #endregion
-
-        #region Methods
-
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            return Print(this);
-        }
 
         #endregion
     }

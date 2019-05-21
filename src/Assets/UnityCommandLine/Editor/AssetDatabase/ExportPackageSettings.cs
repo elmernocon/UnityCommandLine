@@ -24,11 +24,11 @@ namespace UnityCommandLine.AssetDatabase
         /// <summary>
         /// Prints the values of a <see cref="ExportPackageSettings"/> instance.
         /// </summary>
-        /// <param name="export package settings">The export package settings instance.</param>
-        public static string Print(ExportPackageSettings settings)
+        /// <param name="settings">The export package settings instance.</param>
+        /// <param name="stringBuilder">The string builder instance.</param>
+        public static void Print(ExportPackageSettings settings, StringBuilder stringBuilder)
         {
             const string listItemPrefix = "  - ";
-            var stringBuilder = new StringBuilder();
             
             if (settings.AssetPathNames != null && settings.AssetPathNames.Length > 0)
                 stringBuilder.AppendLine(string.Format("AssetPathNames:\n{0}{1}", listItemPrefix, string.Join(
@@ -39,8 +39,6 @@ namespace UnityCommandLine.AssetDatabase
             
             if (settings.Options != ExportPackageOptions.Default)
                 stringBuilder.AppendLine(string.Format("Options: {0}", settings.Options));
-            
-            return stringBuilder.ToString().TrimEnd('\n');
         }
 
         #endregion
@@ -63,16 +61,6 @@ namespace UnityCommandLine.AssetDatabase
         /// Gets and sets the export package options to use when exporting the package.
         /// </summary>
         public ExportPackageOptions Options { get; set; }
-
-        #endregion
-
-        #region Methods
-
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            return Print(this);
-        }
 
         #endregion
     }

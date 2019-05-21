@@ -10,6 +10,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,16 +42,14 @@ namespace UnityCommandLine.AssetDatabase
         /// <param name="title">The title.</param>
         private static void PrintSettings(ExportPackageSettings settings, string title = null)
         {
-            PrintSeparator();
+            var stringBuilder = new StringBuilder();
             
-            if (!string.IsNullOrEmpty(title))
-                PrintLine(title);
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
+            if (!string.IsNullOrEmpty(title)) stringBuilder.AppendLine(title);
+            ExportPackageSettings.Print(settings, stringBuilder);
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
             
-            Print(settings.ToString());
-            
-            PrintSeparator();
-
-            PrintLine();
+            PrintLine(stringBuilder.ToString());
         }
 
         #endregion
@@ -125,14 +124,10 @@ namespace UnityCommandLine.AssetDatabase
             string packageContentsString;
             string[] packageContents = null;
             if (GetArgumentValue(Values.ARG_PACKAGE_CONTENTS, out packageContentsString))
-            {
                 packageContents = packageContentsString.Split(',')
                                                        .Where(content => File.Exists(content) || Directory.Exists(content))
                                                        .ToArray();
-                
-                PrintLine(string.Join(", ", packageContents));
-            }
-                
+
             if (packageContents == null || packageContents.Length == 0)
                 throw new Exception("No package contents were selected.");
 

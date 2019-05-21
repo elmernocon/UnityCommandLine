@@ -29,19 +29,16 @@ namespace UnityCommandLine.BuildPipeline
         /// Stringifies a <see cref="BuildReport"/> instance.
         /// </summary>
         /// <param name="report">The build report.</param>
+        /// <param name="stringBuilder">The string builder instance.</param>
         /// <param name="verbose">Whether or not the output is verbose.</param>
-        /// <returns>The stringified build report.</returns>
-        public static string StringifyReport(BuildReport report, bool verbose = false)
+        public static void StringifyReport(BuildReport report, StringBuilder stringBuilder,
+                                           bool verbose = false)
         {
-            var stringBuilder = new StringBuilder();
-
             stringBuilder.AppendLine("Build Report:");
             StringifySummary(report.summary, stringBuilder);
             StringifyStrippingInfo(report.strippingInfo, stringBuilder);
             StringifySteps(report.steps, stringBuilder, verbose);
             StringifyFiles(report.files, stringBuilder, verbose);
-
-            return stringBuilder.ToString().TrimEnd('\n');
         }
 
         /// <summary>
@@ -145,10 +142,10 @@ namespace UnityCommandLine.BuildPipeline
             if (step.messages == null || step.messages.Length <= 0)
                 return;
             
-            stringBuilder.AppendLine($"{ind} - Messages: {step.messages}");
+            stringBuilder.AppendLine($"{ind} - Messages: {step.messages.Length}");
 
             foreach (var message in step.messages)
-                stringBuilder.AppendLine($"{ind}  - {message}");
+                stringBuilder.AppendLine($"{ind} - {message.content.Replace('\n', ' ')}");
         }
 
         /// <summary>

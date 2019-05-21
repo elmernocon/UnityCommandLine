@@ -9,6 +9,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UBuildPipeline = UnityEditor.BuildPipeline;
@@ -42,16 +43,14 @@ namespace UnityCommandLine.BuildPipeline
         /// <param name="title">The title.</param>
         private static void PrintSettings(BuildAssetBundlesSettings settings, string title = null)
         {
-            PrintSeparator();
+            var stringBuilder = new StringBuilder();
             
-            if (!string.IsNullOrEmpty(title))
-                PrintLine(title);
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
+            if (!string.IsNullOrEmpty(title)) stringBuilder.AppendLine(title);
+            BuildAssetBundlesSettings.Print(settings, stringBuilder);
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
             
-            Print(settings.ToString());
-            
-            PrintSeparator();
-
-            PrintLine();
+            PrintLine(stringBuilder.ToString());
         }
 
         #endregion

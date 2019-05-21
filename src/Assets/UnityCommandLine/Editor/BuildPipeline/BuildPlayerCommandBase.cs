@@ -9,6 +9,7 @@
 
 using System;
 using System.Linq;
+using System.Text;
 using UnityEditor;
 using UBuildPipeline = UnityEditor.BuildPipeline;
 
@@ -60,16 +61,22 @@ namespace UnityCommandLine.BuildPipeline
         /// Prints a build report.
         /// </summary>
         /// <param name="report">The build report.</param>
-        /// <returns>The stringified report.</returns>
 #if UNITY_2018_1_OR_NEWER
-        private static string PrintReport(BuildReport report)
+        private static void PrintReport(BuildReport report)
         {
-            return BuildReportUtils.StringifyReport(report, Values.DEFAULT_BUILD_REPORT_VERBOSE);
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
+            BuildReportUtils.StringifyReport(report, stringBuilder, Values.DEFAULT_BUILD_REPORT_VERBOSE);
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
+            
+            PrintLine(stringBuilder.ToString());
         }
 #else
-        private static string PrintReport(string report)
+        private static void PrintReport(string report)
         {
-            return report;
+            PrintLine(report);
         }
 #endif
 
@@ -80,16 +87,14 @@ namespace UnityCommandLine.BuildPipeline
         /// <param name="title">The title.</param>
         private static void PrintSettings(BuildPlayerSettings settings, string title = null)
         {
-            PrintSeparator();
+            var stringBuilder = new StringBuilder();
             
-            if (!string.IsNullOrEmpty(title))
-                PrintLine(title);
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
+            if (!string.IsNullOrEmpty(title)) stringBuilder.AppendLine(title);
+            BuildPlayerSettings.Print(settings, stringBuilder);
+            stringBuilder.AppendLine(UnityCommandLine.Values.SEPARATOR);
             
-            Print(settings.ToString());
-            
-            PrintSeparator();
-
-            PrintLine();
+            PrintLine(stringBuilder.ToString());
         }
 
         #endregion
@@ -142,12 +147,8 @@ namespace UnityCommandLine.BuildPipeline
                     throw new Exception("BuildPipeline is busy.");
             
                 var report = BuildPlayer(Settings);
-                
-                PrintLine();
-                PrintSeparator();
-                Print(PrintReport(report));
-                PrintSeparator();
-                PrintLine();
+
+                PrintReport(report);
             }
             finally
             {

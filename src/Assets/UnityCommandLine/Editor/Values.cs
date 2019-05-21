@@ -17,6 +17,11 @@ namespace UnityCommandLine
     public static class Values
     {
         #region Constants
+        
+        /// <summary>
+        /// The separator string.
+        /// </summary>
+        public const string SEPARATOR = "-------------------------------------------------------------------------------";
 
         /// <summary>
         /// The default string comparison.

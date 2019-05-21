@@ -52,10 +52,10 @@ namespace UnityCommandLine.BuildPipeline
         /// Prints the values of a <see cref="BuildPlayerSettings"/> instance.
         /// </summary>
         /// <param name="settings">The build player settings instance.</param>
-        public static string Print(BuildPlayerSettings settings)
+        /// <param name="stringBuilder">The string builder instance.</param>
+        public static void Print(BuildPlayerSettings settings, StringBuilder stringBuilder)
         {
             const string listItemPrefix = "  - ";
-            var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine(string.Format("EditorUserBuildSettings.activeBuildTarget = {0} ({1})", settings.Target, settings.TargetGroup));
             stringBuilder.AppendLine(string.Format("PlayerSettings.applicationIdentifier = {0}", settings.ApplicationIdentifier));
@@ -70,8 +70,6 @@ namespace UnityCommandLine.BuildPipeline
             
             if (settings.Options != BuildOptions.None)
                 stringBuilder.AppendLine(string.Format("Options: {0}", settings.Options));
-            
-            return stringBuilder.ToString().TrimEnd('\n');
         }
 
         #endregion
@@ -128,12 +126,6 @@ namespace UnityCommandLine.BuildPipeline
         public void Apply()
         {
             Apply(this);
-        }
-
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            return Print(this);
         }
 
         #endregion

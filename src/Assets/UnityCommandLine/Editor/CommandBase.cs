@@ -83,7 +83,7 @@ namespace UnityCommandLine
         /// <param name="message">The message.</param>
         protected static void Print(string message = "")
         {
-            Console.Out.Write(message);
+            Debug.Log(message);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace UnityCommandLine
         /// <param name="message">The message.</param>
         protected static void PrintLine(string message = "")
         {
-            Console.Out.WriteLine(message);
+            Debug.Log(message);
         }
 
         /// <summary>
@@ -100,9 +100,9 @@ namespace UnityCommandLine
         /// </summary>
         protected static void PrintSeparator()
         {
-            PrintLine("-------------------------------------------------------------------------------");
+            PrintLine(Values.SEPARATOR);
         }
-        
+
         #endregion
 
         #endregion
