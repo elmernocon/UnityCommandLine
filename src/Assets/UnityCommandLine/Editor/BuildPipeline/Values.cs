@@ -79,6 +79,26 @@ namespace UnityCommandLine.BuildPipeline
         public const string ARG_BUNDLE_VERSION = "-bundleVersion";
 
         /// <summary>
+        /// The argument key for <see cref="PlayerSettings.Android.keyaliasName"/>.
+        /// </summary>
+        public const string ARG_ANDROID_KEY_ALIAS_NAME = "-androidKeyAliasName";
+
+        /// <summary>
+        /// The argument key for <see cref="PlayerSettings.Android.keyaliasPass"/>.
+        /// </summary>
+        public const string ARG_ANDROID_KEY_ALIAS_PASS = "-androidKeyAliasPass";
+
+        /// <summary>
+        /// The argument key for <see cref="PlayerSettings.Android.keystoreName"/>.
+        /// </summary>
+        public const string ARG_ANDROID_KEY_STORE_NAME = "-androidKeyStoreName";
+
+        /// <summary>
+        /// The argument key for <see cref="PlayerSettings.Android.keystorePass"/>.
+        /// </summary>
+        public const string ARG_ANDROID_KEY_STORE_PASS = "-androidKeyStorePass";
+
+        /// <summary>
         /// The argument switch for <see cref="BuildOptions.Development"/>.
         /// </summary>
         public const string ARG_OPTION_DEVELOPMENT = "-optionDevelopment";

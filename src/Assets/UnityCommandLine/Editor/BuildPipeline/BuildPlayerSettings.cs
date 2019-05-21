@@ -32,6 +32,10 @@ namespace UnityCommandLine.BuildPipeline
             EditorUserBuildSettings.SwitchActiveBuildTarget(targetGroup, settings.Target);
             PlayerSettings.SetApplicationIdentifier(targetGroup, settings.ApplicationIdentifier);
             PlayerSettings.bundleVersion = settings.BundleVersion;
+            PlayerSettings.Android.keyaliasName = settings.AndroidKeyAliasName;
+            PlayerSettings.Android.keyaliasPass = settings.AndroidKeyAliasPass;
+            PlayerSettings.Android.keystoreName = settings.AndroidKeyStoreName;
+            PlayerSettings.Android.keystorePass = settings.AndroidKeyStorePass;
         }
 
         /// <summary>
@@ -44,7 +48,11 @@ namespace UnityCommandLine.BuildPipeline
             {
                     Target = EditorUserBuildSettings.activeBuildTarget,
                     ApplicationIdentifier = PlayerSettings.applicationIdentifier,
-                    BundleVersion = PlayerSettings.bundleVersion
+                    BundleVersion = PlayerSettings.bundleVersion,
+                    AndroidKeyAliasName = PlayerSettings.Android.keyaliasName,
+                    AndroidKeyAliasPass = PlayerSettings.Android.keyaliasPass,
+                    AndroidKeyStoreName = PlayerSettings.Android.keystoreName,
+                    AndroidKeyStorePass = PlayerSettings.Android.keystorePass
             };
         }
 
@@ -60,6 +68,16 @@ namespace UnityCommandLine.BuildPipeline
             stringBuilder.AppendLine(string.Format("EditorUserBuildSettings.activeBuildTarget = {0} ({1})", settings.Target, settings.TargetGroup));
             stringBuilder.AppendLine(string.Format("PlayerSettings.applicationIdentifier = {0}", settings.ApplicationIdentifier));
             stringBuilder.AppendLine(string.Format("PlayerSettings.bundleVersion = {0}", settings.BundleVersion));
+
+            if (!string.IsNullOrEmpty(settings.AndroidKeyAliasName) ||
+                !string.IsNullOrEmpty(settings.AndroidKeyStoreName))
+            {
+                stringBuilder.AppendLine("PlayerSettings.Android:");
+                stringBuilder.AppendLine(string.Format(" - KeyAliasName: {0}", settings.AndroidKeyAliasName));
+                stringBuilder.AppendLine(string.Format(" - KeyAliasPass: {0}", settings.AndroidKeyAliasPass));
+                stringBuilder.AppendLine(string.Format(" - KeyStoreName: {0}", settings.AndroidKeyStoreName));
+                stringBuilder.AppendLine(string.Format(" - KeyStorePass: {0}", settings.AndroidKeyStorePass));
+            }
 
             if (!string.IsNullOrEmpty(settings.OutputPath))
                 stringBuilder.AppendLine(string.Format("OutputPath: {0}", settings.OutputPath));
@@ -92,6 +110,26 @@ namespace UnityCommandLine.BuildPipeline
         /// Gets and sets the <see cref="PlayerSettings.bundleVersion"/>
         /// </summary>
         public string BundleVersion { get; set; }
+        
+        /// <summary>
+        /// Gets and sets the <see cref="PlayerSettings.Android.keyaliasName"/>.
+        /// </summary>
+        public string AndroidKeyAliasName { get; set; }
+        
+        /// <summary>
+        /// Gets and sets the <see cref="PlayerSettings.Android.keystoreName"/>.
+        /// </summary>
+        public string AndroidKeyAliasPass { get; set; }
+        
+        /// <summary>
+        /// Gets and sets the <see cref="PlayerSettings.Android.keyaliasName"/>.
+        /// </summary>
+        public string AndroidKeyStoreName { get; set; }
+        
+        /// <summary>
+        /// Gets and sets the <see cref="PlayerSettings.Android.keystorePass"/>.
+        /// </summary>
+        public string AndroidKeyStorePass { get; set; }
 
         /// <summary>
         /// Gets best matching <see cref="BuildTargetGroup"/> for the build target <see cref="Target"/>.

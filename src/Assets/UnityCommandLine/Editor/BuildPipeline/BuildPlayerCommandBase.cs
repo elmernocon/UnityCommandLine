@@ -187,6 +187,26 @@ namespace UnityCommandLine.BuildPipeline
             // Set the levels to include in the build.
             Settings.Levels = GetEnabledScenes();
 
+            // Set android only settings.
+            if (Settings.TargetGroup == BuildTargetGroup.Android)
+            {
+                string keyAliasName;
+                if (GetArgumentValue(Values.ARG_ANDROID_KEY_ALIAS_NAME, out keyAliasName))
+                    Settings.AndroidKeyAliasName = keyAliasName;
+                
+                string keyAliasPass;
+                if (GetArgumentValue(Values.ARG_ANDROID_KEY_ALIAS_PASS, out keyAliasPass))
+                    Settings.AndroidKeyAliasPass = keyAliasPass;
+                
+                string keyStoreName;
+                if (GetArgumentValue(Values.ARG_ANDROID_KEY_STORE_NAME, out keyStoreName))
+                    Settings.AndroidKeyStoreName = keyStoreName;
+                
+                string keyStorePass;
+                if (GetArgumentValue(Values.ARG_ANDROID_KEY_STORE_PASS, out keyStorePass))
+                    Settings.AndroidKeyStorePass = keyStorePass;
+            }
+
             // Set the initial build option.
             Settings.Options = Values.DEFAULT_BUILD_OPTIONS;
 
