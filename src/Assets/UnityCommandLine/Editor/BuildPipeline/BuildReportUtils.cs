@@ -145,7 +145,7 @@ namespace UnityCommandLine.BuildPipeline
             stringBuilder.AppendLine($"{ind} - Messages: {step.messages.Length}");
 
             foreach (var message in step.messages)
-                stringBuilder.AppendLine($"{ind} - {message.content.Replace('\n', ' ')}");
+                stringBuilder.AppendLine($"{ind}  - {message.content}");
         }
 
         /// <summary>
